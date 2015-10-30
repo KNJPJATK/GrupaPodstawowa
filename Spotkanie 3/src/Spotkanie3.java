@@ -100,7 +100,7 @@ public class Spotkanie3 {
             for (int j = 0; j < wiersz.length; j++) {
                 //  no i w koncu w warunku drugiego fora sprawdzamy ile jest w nim kolumn
                 int liczbaDoWstawienia = wiersz.length * i + j + 1;
-                drugaTablica2d[i][j] = liczbaDoWstawienia;
+                wiersz[j] = liczbaDoWstawienia;
             }
         }
 
