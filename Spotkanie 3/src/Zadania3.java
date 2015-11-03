@@ -354,7 +354,7 @@ public class Zadania3 {
 
         for (int i = 0; i < pierwsza.length; i++) {
             for (int j = 0; j < pierwsza[i].length; j++) {
-                if (pierwsza[i] != druga[i]){
+                if (pierwsza[i][j] != druga[i][j]){
                     return false;
                 }
             }
@@ -371,7 +371,7 @@ public class Zadania3 {
 
         for (int i = 0; i < pierwsza.length; i++) {
             for (int j = 0; j < pierwsza[i].length; j++) {
-                if (pierwsza[i] != druga[i]){
+                if (pierwsza[i][j] != druga[i][j]){
                     return false;
                 }
             }
