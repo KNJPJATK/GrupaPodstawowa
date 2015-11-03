@@ -125,7 +125,7 @@ public class Zadania3 {
 
         //  Tylko uwazaj! Uzywamy tu funkcji z zadania 1!
         if (!czyKwadratowa(macierzZnakow)){
-            System.err.println("EJ! Ale ta macierz znakow w zadaniu 4 miala byc kwadratowa... Nie bawimy sie tak...");
+            System.err.println("EJ! Ale ta macierz znakow w zadaniu 5 miala byc kwadratowa... Nie bawimy sie tak...");
             //  jezeli nie jest kwadratowa, to instrukcja return; zaprzestaniemy wykonywac cokolwiek w niej...
             return;
         }
@@ -388,7 +388,7 @@ public class Zadania3 {
         for (int i = 0; i < macierzZnakow.length; i++) {
             char [] wierszZeZnakami = macierzZnakow[i];
             for (int j = 0; j < wierszZeZnakami.length; j++) {
-                System.out.print(" " + wierszZeZnakami[i]);
+                System.out.print(" " + wierszZeZnakami[j]);
             }
             System.out.println();
         }
@@ -399,9 +399,9 @@ public class Zadania3 {
      */
     private static void printujMacierz(int [][] macierzLiczb){
         for (int i = 0; i < macierzLiczb.length; i++) {
-            int [] wierszZeZnakami = macierzLiczb[i];
-            for (int j = 0; j < wierszZeZnakami.length; j++) {
-                System.out.print(" " + wierszZeZnakami[i]);
+            int [] wierszZLiczbami = macierzLiczb[i];
+            for (int j = 0; j < wierszZLiczbami.length; j++) {
+                System.out.print(" " + wierszZLiczbami[j]);
             }
             System.out.println();
         }
