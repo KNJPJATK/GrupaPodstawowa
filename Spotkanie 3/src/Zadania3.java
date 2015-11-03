@@ -77,7 +77,7 @@ public class Zadania3 {
 
         //  Tu tylko sprawdzamy czy ich ilosc wierszy i kolumn sie zgadza...
         //  UWAGA uzywamy tu funkcji z zadania 2!!!
-        if (czyMacierzeMajaTyleSamoWierszyIKolumn(pierwszaMacierz, drugaMacierz)){
+        if (!czyMacierzeMajaTyleSamoWierszyIKolumn(pierwszaMacierz, drugaMacierz)){
             System.err.println("EJ! Ale w zadaniu 2 te macierze mialy miec tyle samo wierszy i kolumn :/ >.<");
             return null;
         }
@@ -124,7 +124,7 @@ public class Zadania3 {
     public static void wypelnijPrzekatneMacierzyZnakami(char[][] macierzZnakow, char znakDoWypelnienia){
 
         //  Tylko uwazaj! Uzywamy tu funkcji z zadania 1!
-        if (czyKwadratowa(macierzZnakow)){
+        if (!czyKwadratowa(macierzZnakow)){
             System.err.println("EJ! Ale ta macierz znakow w zadaniu 4 miala byc kwadratowa... Nie bawimy sie tak...");
             //  jezeli nie jest kwadratowa, to instrukcja return; zaprzestaniemy wykonywac cokolwiek w niej...
             return;
