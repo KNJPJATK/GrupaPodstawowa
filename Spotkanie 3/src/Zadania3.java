@@ -25,6 +25,12 @@ public class Zadania3 {
         //  jakis wiersz z macierzy moze wyciagnac np tak:
         //  char[] wiersz = macierz[0]; // to jest akurat pierwszy wiersz
 
+        int liczbaWierszy = macierz.length;
+        int liczbaKolumn = macierz[0].length;
+//                                     operator logiczny
+//                                     VV
+        czyKwadratowa = (liczbaWierszy == liczbaKolumn);
+
         //  wstaw true do czyKwadratowa jezeli jest rzeczywiscie kwadratowa
 
         return czyKwadratowa;
@@ -39,6 +45,14 @@ public class Zadania3 {
 
         boolean czyMajaTyleSamoWierszyIKolumn = false;
 
+        int liczbaWierszyWMacierzyPierwszej = pierwszaMacierz.length,
+            liczbaKolumnWMacierzyPierwszej = pierwszaMacierz[0].length;
+
+        int liczbaWierszyWMacierzyDrugiej = drugaMacierz.length,
+            liczbaKolumnWMacierzyDrugiej = drugaMacierz[0].length;
+
+        czyMajaTyleSamoWierszyIKolumn = (liczbaWierszyWMacierzyPierwszej == liczbaWierszyWMacierzyDrugiej)
+                && (liczbaKolumnWMacierzyPierwszej == liczbaKolumnWMacierzyDrugiej);
 
 
         return czyMajaTyleSamoWierszyIKolumn;
@@ -53,7 +67,16 @@ public class Zadania3 {
 
         int sumaElementow = 0;
 
+
         //  jakies for petle pewnie... i cos z ta zmienna sumaElementow musimy robic...
+        for (int i = 0; i < macierzLiczb.length; i++) { // wiersze
+
+            for (int j = 0; j < macierzLiczb[i].length; j++) {
+                int wartoscZMacierzy = macierzLiczb[i][j];
+                sumaElementow += macierzLiczb[i][j];
+            }
+
+        }
 
         return sumaElementow;
     }
@@ -78,18 +101,26 @@ public class Zadania3 {
         //  Tu tylko sprawdzamy czy ich ilosc wierszy i kolumn sie zgadza...
         //  UWAGA uzywamy tu funkcji z zadania 2!!!
         if (!czyMacierzeMajaTyleSamoWierszyIKolumn(pierwszaMacierz, drugaMacierz)){
-            System.err.println("EJ! Ale w zadaniu 2 te macierze mialy miec tyle samo wierszy i kolumn :/ >.<");
+            System.err.println("EJ! Ale w zadaniu 4 te macierze mialy miec tyle samo wierszy i kolumn :/ >.<");
             return null;
         }
 
-        int iloscWierszyMacierzyWynikowej = 0; //Co tu bedzie? :o
-        int iloscKolumnMacierzyWynikowej = 0; //A tu??
+        int iloscWierszyMacierzyWynikowej = pierwszaMacierz.length; //Co tu bedzie? :o
+        int iloscKolumnMacierzyWynikowej = drugaMacierz[0].length; //A tu??
 
         int [][] macierzWynikowa = new int[iloscWierszyMacierzyWynikowej][iloscKolumnMacierzyWynikowej];
 
 
         //  pewnie jakaś pętla... a moze dwie nawet... pewnie tez cos z macierzWynikowa trzeba robic... nie?
+        for (int i = 0; i < iloscWierszyMacierzyWynikowej; i++) {
+            for (int j = 0; j < iloscKolumnMacierzyWynikowej; j++) {
 
+                int wartoscZPierwszej = pierwszaMacierz[i][j],
+                    wartoscZDrugiej = drugaMacierz[i][j];
+
+                macierzWynikowa[i][j] = wartoscZPierwszej + wartoscZDrugiej;
+            }
+        }
 
         //  jak juz wszystko wyliczylismy to zwracamy nasza macierz wynikowa do swiata zewnetrznego! paaa!
         return macierzWynikowa;
@@ -113,6 +144,18 @@ public class Zadania3 {
      *  e o g
      *  o i o
      *
+     * macierzZnakow[i][macierzZnakow.length-1-i] = znakDoWypelnienia;
+     *
+     * j = macierzZnakow.length-1-i
+     *
+     * i 0..1..2
+     * j 2..1..0
+     *
+     *  00  01  02
+     *  10  11  12
+     *  20  21  22
+     *
+     *
      *  Mały hint:
      *
      *  Legenda
@@ -124,7 +167,9 @@ public class Zadania3 {
     public static void wypelnijPrzekatneMacierzyZnakami(char[][] macierzZnakow, char znakDoWypelnienia){
 
         //  Tylko uwazaj! Uzywamy tu funkcji z zadania 1!
-        if (!czyKwadratowa(macierzZnakow)){
+        boolean czyKwadratowa = czyKwadratowa(macierzZnakow);
+        //  NIE-czyKwadratowa
+        if (!czyKwadratowa){
             System.err.println("EJ! Ale ta macierz znakow w zadaniu 5 miala byc kwadratowa... Nie bawimy sie tak...");
             //  jezeli nie jest kwadratowa, to instrukcja return; zaprzestaniemy wykonywac cokolwiek w niej...
             return;
@@ -136,6 +181,41 @@ public class Zadania3 {
         //  Najprosciej:
         //  Dla przekątnej z lewego gornego rogu do dolnego prawego - dwie zagniezdzone petle for i sprawdzamy czy akurat
         //  jestesmy na komorkach przekatnej.
+
+        //  DWIE PETLE!!!
+
+        /*//przekatna z lewego gornego rogu do prawego dolnego
+        for (int i = 0; i < macierzZnakow.length; i++) {
+            for (int j = 0; j < macierzZnakow[i].length; j++) {
+                if (i == j){
+                    macierzZnakow[i][j] = znakDoWypelnienia;
+                }
+            }
+        }
+
+        for (int i = 0; i < macierzZnakow.length; i++) {
+            for (int j = macierzZnakow[i].length - 1; j >= 0; j--) {
+                if ((i + j) == macierzZnakow.length - 1){
+                    macierzZnakow[i][j] = znakDoWypelnienia;
+                }
+
+            }
+        }*/
+
+        //  dwie petle - bez zagniedzen
+        /*for (int i = 0; i < macierzZnakow.length; i++) {
+            macierzZnakow[i][i] = znakDoWypelnienia;
+        }
+
+        for (int i = 0; i < macierzZnakow.length; i++) {
+            macierzZnakow[i][macierzZnakow.length-1-i] = znakDoWypelnienia;
+        }*/
+
+
+        for (int i = 0; i < macierzZnakow.length; i++) {
+            macierzZnakow[i][i] = znakDoWypelnienia;
+            macierzZnakow[i][macierzZnakow.length-1-i] = znakDoWypelnienia;
+        }
 
         //  Ambitniej(i lepiej tak naprawde) tylko jedną petla na przekątną! Jest to bardzo proste i o wiele wydajniejsze.
 
@@ -155,14 +235,14 @@ public class Zadania3 {
      *      mamy takie macierze znakow
      *
      *      macierz pierwsza:
-     *      J A
-     *      J E
-     *      O K
+     *      J A V
+     *      J E S
+     *      O K T
      *
      *      macierz druga:
-     *      V A
-     *      S T
-     *      E J
+     *      A
+     *      T
+     *      J
      *
      *      I chcemy złączyć te macierze do jednej wspolnej tak aby wygladała ona o tak:
      *
@@ -171,38 +251,41 @@ public class Zadania3 {
      *      O K E J
      */
     public static char [][] zlaczMacierzeZnakow(char[][] pierwszaMacierzZnakow, char[][] drugaMacierzZnakow){
-
         //  jezeli maja inna liczbe wierszy to nic z tego, nie zdzialamy nic wiecej...
         if (pierwszaMacierzZnakow.length != drugaMacierzZnakow.length){
             return new char[0][0]; //   zwracamy smutna macierz zero na zero :(
         }
 
-        int iloscKolumnWMacierzWynikowej = 0; // O TO! O to trzeba wyliczyc jakos, nie?
-        int iloscWierszyWMacierzyWynikowej  = 0;   // To tez chyba.
+        int iloscKolumnWMacierzWynikowej = pierwszaMacierzZnakow[0].length + drugaMacierzZnakow[0].length; // O TO! O to trzeba wyliczyc jakos, nie?
+        int iloscWierszyWMacierzyWynikowej  = pierwszaMacierzZnakow.length;   // To tez chyba.
 
         char[][] macierzWynikowa = new char[iloscWierszyWMacierzyWynikowej][iloscKolumnWMacierzWynikowej];
-
 
         //  Wg mnie beda dwie podwojne petle for!
         //  Jedna aby przekopiowac znaki z pierwszej
 
-        /*
-            for( ; ; ){
-                for( ; ; ){
-                    kopiujemy z pierwszej do wynikowej...
-                }
+        for (int i = 0; i < pierwszaMacierzZnakow.length; i++) {
+            for (int j = 0; j < pierwszaMacierzZnakow[i].length; j++) {
+                macierzWynikowa[i][j] = pierwszaMacierzZnakow[i][j];
             }
-         */
-
-        //  No i druga aby przekopiowac znaki z drugiej macierzy do tej wynikowej
+        }
 
         /*
-            for( ; ; ){
-                for( ; ; ){
-                    kopiujemy z drugiej do wynikowej...
-                }
-            }
+
+            wynikowa
+                  v
+            J A V
+            J E S
+            O K E
+
          */
+
+        for (int i = 0; i < drugaMacierzZnakow.length; i++) {
+            for (int j = 0; j < drugaMacierzZnakow[i].length; j++) {
+                macierzWynikowa[i][pierwszaMacierzZnakow[i].length+j] = drugaMacierzZnakow[i][j];
+            }
+        }
+
 
         return macierzWynikowa;
     }
@@ -267,7 +350,9 @@ public class Zadania3 {
          ********************ZADANIE 3********************
          */
 
-        int[][] macierzDoZadania3 = {{1, 1, 1}, {2, 2, 2}, {3, 3, 3}};
+        int[][] macierzDoZadania3 = {   {1, 1, 1},
+                                        {2, 2, 2},
+                                        {3, 3, 3}};
 
         int sumaElementow = 18;
 
@@ -305,7 +390,9 @@ public class Zadania3 {
          ********************ZADANIE 5********************
          */
 
-        char [][] macierzDoZadania5 = {{'a','b','c'},{'e', 'f', 'g'}, {'h', 'i', 'j'}};
+        char [][] macierzDoZadania5 = { {'a','b','c'},
+                                        {'e', 'f', 'g'},
+                                        {'h', 'i', 'j'}};
         char znakDoPrzekątnych = 'o';
 
         System.out.println("Już musisz sam sobie porównać czy dobrze wypelnia!");
